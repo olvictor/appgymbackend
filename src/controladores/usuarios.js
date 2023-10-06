@@ -42,13 +42,14 @@ const loginUsuario = async (req,res) =>{
     
     try {
         
-        const usuario = await pool.query('SELECT * FROM usuarios WHERE email = $1',[email])
-               
-        if(usuario.rowCount <= 0){
+        const usuario = await knex.select('*').from('usuarios').where({email}).first()
+    
+
+        if(!usuario){
             return res.status(404).json({mensagem:'Usuário ou senha inválidos.'})
         }
 
-        const validarSenha =  await bcrypt.compare(senha, usuario.rows[0].password)
+        const validarSenha =  await bcrypt.compare(senha, usuario.password)
         
         if(!validarSenha){
             return res.status(404).json({mensagem:'Usuário ou senha inválidos.'})
@@ -56,11 +57,11 @@ const loginUsuario = async (req,res) =>{
 
         const secret = process.env.SECRET_KEY
 
-        const token = jwt.sign({id: usuario.rows[0].id},secret,{expiresIn: '24h'})
+        const token = jwt.sign({id: usuario.id},secret,{expiresIn: '24h'})
         
-        const {password: userSenha, ...user} = usuario.rows[0]
+        const {password: userSenha, ...user} = usuario
         
-        return res.status(200).json({ token, ...user})
+        return res.status(200).json({ user,token})
     }
     catch(error){
         return res.status(500).json({message:`Erro interno do servidor : ${error}`})
