@@ -69,8 +69,14 @@ const loginUsuario = async (req,res) =>{
 
 }
 
+const getUsuario = async (req,res) =>{
+    const usuario = req.usuario
+
+    return res.status(200).json(usuario)
+}
+
 module.exports  = {
     cadastarUsuario,
     loginUsuario,
-
+    getUsuario
 }

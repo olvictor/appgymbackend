@@ -1,9 +1,9 @@
 const jwt = require('jsonwebtoken')
-const pool = require('../src/conectiondatabase/connectDB')
+const knex = require('../src/conectiondatabase/connectDB')
 require('dotenv').config()
 
 
-const validarUsuario = async (req,res) =>{
+const validarUsuario = async (req,res,next) =>{
 
         const { authorization } = req.headers
         const secret = process.env.SECRET_KEY
@@ -17,22 +17,24 @@ const validarUsuario = async (req,res) =>{
         if(!token){
             return res.status(400).json({mensagem:'Token inválido .'})
         }
+
         try{
             const { id } = jwt.verify(token,secret)
             
-            const usuarioLogado = await pool.query('SELECT * FROM usuarios WHERE id = $1',[id])
-
-            if(usuarioLogado.rowCount <= 0){
+            const usuarioLogado = await knex.select('*').from('usuarios').where({id}).first()
+        
+            if(!usuarioLogado){
                 return res.status(400).json({mensagem:'Acesso não autorizado .'})
             }
 
-            const { password: __, ...user} = usuarioLogado.rows[0]
+            const { password: __, ...user} = usuarioLogado
 
             req.usuario = user
             
             next()
         }
         catch(error){
+            console.log(error)
             return res.status(500).json({mensagem:error})
         }
 }

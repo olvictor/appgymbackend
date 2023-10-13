@@ -1,16 +1,17 @@
 const express = require('express');
-const { cadastarUsuario, loginUsuario} = require('../controladores/usuarios');
+const { cadastarUsuario, loginUsuario, getUsuario} = require('../controladores/usuarios');
 const { validarUsuario } = require('../intermediario');
+const schemaCadastroUsuarios = require('../schemaCadastroUsuarios');
+const validarCampos = require('../validarCampos');
+const schemaLoginUsuario = require('../schemaLoginUsuario');
 const rotas = express();
 
-rotas.post('/user/cadastrar', cadastarUsuario)
-rotas.post('/user/login', loginUsuario)
+rotas.post('/user/cadastrar',validarCampos(schemaCadastroUsuarios), cadastarUsuario)
+rotas.post('/user/login',validarCampos(schemaLoginUsuario), loginUsuario)
 
 rotas.use(validarUsuario)
-rotas.get('/user/perfil', (req, res)=>{
-    res.send('sakopas')
-})
 
+rotas.get('/user/perfil', getUsuario)
 
 
 module.exports = rotas
