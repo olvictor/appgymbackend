@@ -4,6 +4,9 @@ const { validarUsuario } = require('../intermediario');
 const schemaCadastroUsuarios = require('../schemaCadastroUsuarios');
 const validarCampos = require('../validarCampos');
 const schemaLoginUsuario = require('../schemaLoginUsuario');
+const multer = require('../multer');
+const schemaPostUsuario = require('../schemaPostUsuario');
+const { cadastrarPost } = require('../controladores/posts');
 const rotas = express();
 
 rotas.post('/user/cadastrar',validarCampos(schemaCadastroUsuarios), cadastarUsuario)
@@ -12,6 +15,8 @@ rotas.post('/user/login',validarCampos(schemaLoginUsuario), loginUsuario)
 rotas.use(validarUsuario)
 
 rotas.get('/user/perfil', getUsuario)
+rotas.post('/user/post', multer.single('imagem'),validarCampos(schemaPostUsuario),cadastrarPost)
+
 
 
 module.exports = rotas
