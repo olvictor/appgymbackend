@@ -7,14 +7,9 @@ const cadastarUsuario = async (req,res) =>{
 
     const { username,email,senha } = req.body
 
-
-    if(!username || !email || !senha){
-        return res.status(400).json({message:'O username , email e senha são obrigatórios.'})
-    }
-
-    const passwordHash = await bcrypt.hash(senha,10)
-
+    
     try {
+    const passwordHash = await bcrypt.hash(senha,10)
     const usuarioExistente = await knex.select('*').from('usuarios').where({email}).first()
     
     if(usuarioExistente){
@@ -35,10 +30,6 @@ const cadastarUsuario = async (req,res) =>{
 
 const loginUsuario = async (req,res) =>{
     const { email, senha } = req.body
-
-    if(!email || !senha){
-        return res.status(400).json({message:'O email e senha são obrigatórios.'})
-    }
     
     try {
         
