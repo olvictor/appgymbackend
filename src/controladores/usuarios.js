@@ -34,8 +34,7 @@ const loginUsuario = async (req,res) =>{
     try {
         
         const usuario = await knex.select('*').from('usuarios').where({email}).first()
-    
-
+        console.log(usuario)
         if(!usuario){
             return res.status(404).json({mensagem:'Usuário ou senha inválidos.'})
         }

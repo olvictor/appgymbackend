@@ -26,6 +26,23 @@ const cadastrarPost = async (req,res) =>{
 }
 
 
+const buscarPosts = async (req,res) => {
+    const {id} = req.usuario;
+
+    try{
+     const resultado =  await knex.select('*').from('posts').where({usuario_id:id})
+     if(!resultado){
+        return res.status(200).json({mensagem:'Nenhum post foi encontrado !'})
+     }
+
+     return res.status(200).json(resultado)
+    }catch(error){
+        return res.status(500).json(error.message) 
+    }
+}
+
+
 module.exports = {
-    cadastrarPost
+    cadastrarPost,
+    buscarPosts
 }
