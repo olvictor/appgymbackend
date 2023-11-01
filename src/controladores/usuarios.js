@@ -6,10 +6,10 @@ require('dotenv').config()
 const cadastarUsuario = async (req,res) =>{
 
     const { username,email,senha } = req.body
-
     
     try {
     const passwordHash = await bcrypt.hash(senha,10)
+    
     const usuarioExistente = await knex.select('*').from('usuarios').where({email}).first()
     
     if(usuarioExistente){
@@ -65,8 +65,46 @@ const getUsuario = async (req,res) =>{
     return res.status(200).json(usuario)
 }
 
+
+const cadastrarInfoUsuarios = async (req,res) =>{
+    const {id} = req.usuario
+    const {peso,altura,idade,sexo} = req.body
+
+    try{
+        const cadastrarInfoUsuario = await knex('info_usuarios').insert({altura,peso,idade,sexo,user_id: id}).returning('*')
+    
+        return res.status(200).json(cadastrarInfoUsuario)
+    }
+    catch(error){
+        console.log(error.message)
+        if(error.code === '23505'){
+          return res.status(400).json({mensagem:"Informações do usuário já registradas com esse ID."})
+
+        }
+          return res.status(500).json({mensagem:"Erro interno do servidor ."})
+    }
+
+
+}
+
+const buscarInfoUsuarios = async (req,res) =>{
+    const {id} = req.usuario
+
+    try{
+        const buscarInfo = await knex('info_usuarios').select('*').where({user_id: id}).first()
+    
+        return res.status(200).json(buscarInfo)
+    }
+    catch(error){
+        return res.status(500).json({mensagem:"Erro interno do servidor ."})
+         
+    }
+}
+
 module.exports  = {
     cadastarUsuario,
     loginUsuario,
-    getUsuario
+    getUsuario,
+    cadastrarInfoUsuarios,
+    buscarInfoUsuarios
 }
