@@ -34,7 +34,7 @@ const loginUsuario = async (req,res) =>{
     try {
         
         const usuario = await knex.select('*').from('usuarios').where({email}).first()
-        console.log(usuario)
+
         if(!usuario){
             return res.status(404).json({mensagem:'Usuário ou senha inválidos.'})
         }
@@ -67,16 +67,15 @@ const getUsuario = async (req,res) =>{
 
 
 const cadastrarInfoUsuarios = async (req,res) =>{
-    const {id} = req.usuario
-    const {peso,altura,idade,sexo} = req.body
+    const { id } = req.usuario
+    const { peso ,altura ,idade ,sexo ,nivel_de_atividade } = req.body
 
     try{
-        const cadastrarInfoUsuario = await knex('info_usuarios').insert({altura,peso,idade,sexo,user_id: id}).returning('*')
+        const cadastrarInfoUsuario = await knex('info_usuarios').insert({altura,peso,idade,sexo,user_id: id, nivel_de_atividade}).returning('*')
     
         return res.status(200).json(cadastrarInfoUsuario)
     }
     catch(error){
-        console.log(error.message)
         if(error.code === '23505'){
           return res.status(400).json({mensagem:"Informações do usuário já registradas com esse ID."})
 
