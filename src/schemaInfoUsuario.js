@@ -20,8 +20,12 @@ const schemaInfoUsuario = joi.object({
         "number.base" : "O campo idade precisa ser um número ."
     }),
     nivel_de_atividade: joi.string().required().messages({
-        "any.required" : "O campo idade é obrigatório .",
-        "string.base" : "O campo idade precisa ser um número ."
+        "any.required" : "O campo nivel_de_atividade é obrigatório .",
+        "string.base" : "O campo nivel_de_atividade precisa ser um número ."
+    }),
+    objetivo: joi.string().required().messages({
+        "any.required" : "O campo objetivo é obrigatório .",
+        "string.base" : "O campo objetivo precisa ser um número ."
     })
 })
 
