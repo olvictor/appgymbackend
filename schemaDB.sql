@@ -25,3 +25,7 @@ usuario_id INT references usuarios(id),
 post_id INT references posts(id),
 data_comentario timestamp DEFAULT now()
 );
+
+
+ALTER TABLE usuarios
+ADD COlumn user_photo TEXT;

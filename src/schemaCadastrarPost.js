@@ -1,13 +1,13 @@
 const joi = require("joi");
 
-const schemaCadastrarPost = joi.object({
-  post_id: joi.required().messages({
-    "any.required": "O campo post_id é obrigatório .",
-  }),
-  comentario: joi.string().required().messages({
-    "any.required": "O campo comentario é obrigatório",
-    "string.base": "O campo comentario precisa ser uma string .",
-  }),
-});
+const schemaPostUsuario = joi
+  .object({
+    conteudo: joi.string().required().messages({
+      "string.base": "O campo conteudo precisa ser uma string .",
+      "string.empty": "O campo conteudo é obrigatório .",
+      "any.required": "O campo conteudo é obrigatório .",
+    }),
+  })
+  .unknown(true);
 
-module.exports = schemaCadastrarPost;
+module.exports = schemaPostUsuario;
