@@ -35,7 +35,8 @@ const buscarComentarios = async (req, res) => {
       return res.status(400).json({ mensagem: "Post não encontrado." });
     }
 
-    const comentarios = await knex.raw(`SELECT 
+    const comentarios = await knex.raw(
+      `SELECT 
     comentarios.id,
     comentarios.comentario,
     comentarios.usuario_id,
@@ -45,10 +46,10 @@ const buscarComentarios = async (req, res) => {
     usuarios.username as usuario_username,
     usuarios.email as usuario_email,
     usuarios.user_photo as  usuario_photo
-    FROM comentarios JOIN usuarios ON comentarios.usuario_id = usuarios.id WHERE post_id = 3
-    `);
-
-    return res.status(200).json(comentarios.rows);
+    FROM comentarios JOIN usuarios ON comentarios.usuario_id = usuarios.id WHERE post_id = ${post_id}    `
+    );
+    const arrayOrdenado = comentarios.rows.reverse();
+    return res.status(200).json(arrayOrdenado);
   } catch (error) {
     return res.status(500).json({ mensagem: "Erro interno do servidor ." });
   }

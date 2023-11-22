@@ -29,3 +29,20 @@ data_comentario timestamp DEFAULT now()
 
 ALTER TABLE usuarios
 ADD COlumn user_photo TEXT;
+
+alter table usuarios
+ALTER column user_photo SET DEFAULT 'https://yourbody.s3.us-east-005.backblazeb2.com/imagens/user.png';
+
+CREATE TABLE usuarios_info(
+id SERIAL PRIMARY KEY,
+usuario_id INT references usuarios(id) unique,
+nome TEXT,
+idade numeric,
+altura numeric,
+peso numeric,
+sexo text,
+imc numeric,
+imc_classificacao text,
+nivel_de_atividade text,
+objetivo text
+);

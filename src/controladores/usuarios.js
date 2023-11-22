@@ -12,11 +12,18 @@ const cadastarUsuario = async (req, res) => {
     const usuarioExistente = await knex
       .select("*")
       .from("usuarios")
-      .where({ email })
+      .where({ username })
       .first();
 
-    if (usuarioExistente) {
-      return res.status(400).json({ mensagem: "Email já cadastrado ." });
+    const emailExistente = await knex
+      .select("*")
+      .from("usuarios")
+      .where({ email })
+      .first();
+    if (usuarioExistente || emailExistente) {
+      return res
+        .status(400)
+        .json({ mensagem: "Email e ou username já cadastrado ." });
     }
 
     const result = await knex
@@ -37,13 +44,13 @@ const cadastarUsuario = async (req, res) => {
 };
 
 const loginUsuario = async (req, res) => {
-  const { email, senha } = req.body;
+  const { username, senha } = req.body;
 
   try {
     const usuario = await knex
       .select("*")
       .from("usuarios")
-      .where({ email })
+      .where({ username })
       .first();
 
     if (!usuario) {
@@ -78,11 +85,32 @@ const getUsuario = async (req, res) => {
 
 const cadastrarInfoUsuarios = async (req, res) => {
   const { id } = req.usuario;
-  const { peso, altura, idade, sexo, nivel_de_atividade } = req.body;
+  const {
+    nome,
+    peso,
+    altura,
+    idade,
+    sexo,
+    nivel_de_atividade,
+    imc,
+    imc_classificacao,
+    objetivo,
+  } = req.body;
 
   try {
-    const cadastrarInfoUsuario = await knex("info_usuarios")
-      .insert({ altura, peso, idade, sexo, user_id: id, nivel_de_atividade })
+    const cadastrarInfoUsuario = await knex("usuarios_info")
+      .insert({
+        nome,
+        altura,
+        peso,
+        idade,
+        sexo,
+        usuario_id: id,
+        nivel_de_atividade,
+        imc,
+        imc_classificacao,
+        objetivo,
+      })
       .returning("*");
 
     return res.status(200).json(cadastrarInfoUsuario);
@@ -100,11 +128,15 @@ const buscarInfoUsuarios = async (req, res) => {
   const { id } = req.usuario;
 
   try {
-    const buscarInfo = await knex("info_usuarios")
+    const buscarInfo = await knex("usuarios_info")
       .select("*")
-      .where({ user_id: id })
+      .where({ usuario_id: id })
       .first();
-
+    if (!buscarInfo) {
+      return res
+        .status(400)
+        .json({ mensagem: "Nehuma informação cadastrada para o usuário" });
+    }
     return res.status(200).json(buscarInfo);
   } catch (error) {
     return res.status(500).json({ mensagem: "Erro interno do servidor ." });
