@@ -5,7 +5,7 @@ const criarComentario = async (req, res) => {
   const { post_id, comentario } = req.body;
 
   try {
-    const postExistente = await knex("comentarios")
+    const postExistente = await knex("posts")
       .select("*")
       .where({ id: post_id })
       .first();

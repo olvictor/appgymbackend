@@ -1,43 +1,44 @@
-const jwt = require('jsonwebtoken')
-const knex = require('../src/conectiondatabase/connectDB')
-require('dotenv').config()
+const jwt = require("jsonwebtoken");
+const knex = require("../src/conectiondatabase/connectDB");
+require("dotenv").config();
 
+const validarUsuario = async (req, res, next) => {
+  const { authorization } = req.headers;
+  const secret = process.env.SECRET_KEY;
 
-const validarUsuario = async (req,res,next) =>{
+  if (!authorization) {
+    return res.status(400).json({ mensagem: "Acesso não autorizado ." });
+  }
 
-        const { authorization } = req.headers
-        const secret = process.env.SECRET_KEY
-        
-        if(!authorization){
-            return res.status(400).json({mensagem:'Acesso não autorizado .'})
-        }
+  const token = authorization.split(" ")[1];
 
-        const token = authorization.split(' ')[1]
-        
-        if(!token){
-            return res.status(400).json({mensagem:'Token inválido .'})
-        }
+  if (!token) {
+    return res.status(400).json({ mensagem: "Token inválido ." });
+  }
 
-        try{
-            const { id } = jwt.verify(token,secret)
-            
-            const usuarioLogado = await knex.select('*').from('usuarios').where({id}).first()
-        
-            if(!usuarioLogado){
-                return res.status(400).json({mensagem:'Acesso não autorizado .'})
-            }
+  try {
+    const { id } = jwt.verify(token, secret);
 
-            const { password: __, ...user} = usuarioLogado
+    const usuarioLogado = await knex
+      .select("*")
+      .from("usuarios")
+      .where({ id })
+      .first();
 
-            req.usuario = user
-            
-            next()
-        }
-        catch(error){
-            console.log(error)
-            return res.status(500).json({mensagem:error})
-        }
-}
+    if (!usuarioLogado) {
+      return res.status(400).json({ mensagem: "Acesso não autorizado ." });
+    }
+
+    const { password: __, ...user } = usuarioLogado;
+
+    req.usuario = user;
+
+    next();
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ mensagem: error });
+  }
+};
 module.exports = {
-    validarUsuario
-}
+  validarUsuario,
+};
