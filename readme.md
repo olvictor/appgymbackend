@@ -12,7 +12,7 @@
 * rotas : Arquivo contendo todas as rotas da aplicação.
 * tests: Testes automatizados.
 
-## -- Rotas da Aplicação --
+## 📋 Rotas da Aplicação 
 
 ### POST /user/cadastrar
 
