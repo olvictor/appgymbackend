@@ -12,7 +12,7 @@ const schemaInfoUsuario = joi
     }),
     sexo: joi.string().required().messages({
       "any.required": "O campo sexo é obrigatório .",
-      "string.base": "O campo sexto precisa ser uma string .",
+      "string.base": "O campo sexo precisa ser uma string .",
     }),
     idade: joi.number().required().messages({
       "any.required": "O campo idade é obrigatório .",

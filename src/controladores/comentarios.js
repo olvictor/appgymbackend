@@ -29,10 +29,10 @@ const buscarComentarios = async (req, res) => {
   try {
     const postExistente = await knex("comentarios")
       .select("*")
-      .where({ id: post_id })
+      .where({ post_id })
       .first();
     if (!postExistente) {
-      return res.status(400).json({ mensagem: "Post não encontrado." });
+      return res.status(200).json();
     }
 
     const comentarios = await knex.raw(

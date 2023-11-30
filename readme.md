@@ -1,9 +1,24 @@
 # YOUR BODY API
 
+## 🚀 Começando
 
-## -- Rotas --
+Essas instruções permitirão que você obtenha uma cópia do projeto em operação na sua máquina local para fins de desenvolvimento e teste.
+
+Consulte **[Implantação](#-implanta%C3%A7%C3%A3o)** para saber como implantar o projeto.
+
+## O projeto segue a seguinte Estrutura de pastas :
+
+ºsrc: Contém o código fonte da aplicação.
+ºconectionbucket: Contém o código de conexão com o bucket de hospedagem de arquivos.
+ºconectiondatabase: Contém o código de conexão com o database.
+ºcontroladores: Código das funções usadas nas rotas.
+ºrotas : Arquivo contendo todas as rotas da aplicação.
+ºtests: Testes automatizados.
+
+## -- Rotas da Aplicação --
 
 ### POST /user/cadastrar
+
 -- receber nome,email,senha no body da requisição.
 -- validar obrigatoriamente nome,email,senha.
 -- verificar existencia do email cadastrado.
@@ -25,8 +40,8 @@
 -- validar o usuário logado pelo id fornecido no token.
 -- retornar os dados do usuário logado e permitir o acesso a outras rotas.
 
-
 ### GET /user/perfil
+
 -- receber o token do usuário.
 -- respoder com as informaçãoes do usuario logado.
 
@@ -54,5 +69,6 @@
 -- responder com status sem conteúdo no corpo da resposta.
 
 ### GET /user/post/
+
 -- listar todos os posts do usuário logado.
 -- responder com status sem conteúdo no corpo da resposta.
