@@ -46,7 +46,7 @@
 > <br>
 >&nbsp;&nbsp;	"user_photo": "https://yourbody.s3.us-east-005.backblazeb2.com/imagens/user.png"
 ><br>
->	}
+>&nbsp;&nbsp;}
 ><br>
 }
 
