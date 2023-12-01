@@ -2,22 +2,53 @@
 
 ## 🚀 Começando
 
-Essas instruções permitirão que você obtenha uma cópia do projeto em operação na sua máquina local para fins de desenvolvimento e teste.
-
-Consulte **[Implantação](#-implanta%C3%A7%C3%A3o)** para saber como implantar o projeto.
 
 ## O projeto segue a seguinte Estrutura de pastas :
 
-ºsrc: Contém o código fonte da aplicação.
-ºconectionbucket: Contém o código de conexão com o bucket de hospedagem de arquivos.
-ºconectiondatabase: Contém o código de conexão com o database.
-ºcontroladores: Código das funções usadas nas rotas.
-ºrotas : Arquivo contendo todas as rotas da aplicação.
-ºtests: Testes automatizados.
+* **src :**  Contém o código fonte da aplicação.
+* **conectionbucket:**  Contém o código de conexão com o bucket de hospedagem de arquivos.
+* **conectiondatabase:**  Contém o código de conexão com o database.
+* **controladores:** Código das funções usadas nas rotas.
+* **rotas :** Arquivo contendo todas as rotas da aplicação.
+* **tests:** Testes automatizados.
 
-## -- Rotas da Aplicação --
+## 📋 Rotas da Aplicação 
 
-### POST /user/cadastrar
+### POST  `/user/cadastrar`
+* Rota para cadastro de usuários.
+
+### Parâmetros
+* Nenhum parâmetro necessário.
+
+### Corpo da requisição.
+> {
+> <br>
+>	&nbsp; "username" : " teste",
+> <br>
+> &nbsp; "email" : <span>" testando@teste.com"</span>,
+> <br>
+>	&nbsp; "senha" : " 123456"
+> <br>
+{
+
+### Exemplo de Resposta.
+>{
+> <br>
+>&nbsp;"mensagem": "Usuario cadastrado com sucesso .",
+> <br>
+>&nbsp;"user": {
+> <br>
+>&nbsp;&nbsp;"id": 1,
+> <br>
+>&nbsp;&nbsp;"username": "teste",
+> <br>
+>&nbsp;&nbsp;"email": "testando@teste.com",
+> <br>
+>&nbsp;&nbsp;	"user_photo": "https://yourbody.s3.us-east-005.backblazeb2.com/imagens/user.png"
+><br>
+>&nbsp;&nbsp;}
+><br>
+}
 
 -- receber nome,email,senha no body da requisição.
 -- validar obrigatoriamente nome,email,senha.
