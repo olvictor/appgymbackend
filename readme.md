@@ -26,7 +26,7 @@
 > <br>
 >	&nbsp; "username" : " teste",
 > <br>
-> &nbsp; "email" : <span>" testando@teste.com"</span>,
+> &nbsp; "email" : <span>" teste@teste.com"</span>,
 > <br>
 >	&nbsp; "senha" : " 123456"
 > <br>
@@ -43,7 +43,7 @@
 > <br>
 >&nbsp;&nbsp;"username": "teste",
 > <br>
->&nbsp;&nbsp;"email": "testando@teste.com",
+>&nbsp;&nbsp;"email": "tese@teste.com",
 > <br>
 >&nbsp;&nbsp;	"user_photo": "https://yourbody.s3.us-east-005.backblazeb2.com/imagens/user.png"
 ><br>
@@ -85,16 +85,31 @@
 ><br>
 >}
 ><br>
-### Criar intermediário de validação de usuário
 
--- receber o token da requisição pelo cabeçalho.
--- validar o usuário logado pelo id fornecido no token.
--- retornar os dados do usuário logado e permitir o acesso a outras rotas.
 
-### GET /user/perfil
+### GET `/user/perfil`
 
--- receber o token do usuário.
--- respoder com as informaçãoes do usuario logado.
+* Rota para buscar usuário.
+
+### Parâmetros
+* Nenhum parâmetro necessário.
+
+### Corpo da requisição.
+* Sem corpo, retorna o usuário logado .
+
+### Exemplo de Resposta.
+>{
+><br>
+>	&nbsp;&nbsp;"id": 1,
+><br>
+>&nbsp;&nbsp;	"username": "teste",
+><br>
+>&nbsp;&nbsp;	"email": "teste@teste.com",
+><br>
+>&nbsp;&nbsp;&nbsp;"user_photo": "https://yourbody.s3.us-east-005.backblazeb2.com/imagens/user.png"
+><br>
+>}
+><br>
 
 ### POST /user/info
 
