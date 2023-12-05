@@ -9,6 +9,7 @@
 * **conectionbucket:**  Contém o código de conexão com o bucket de hospedagem de arquivos.
 * **conectiondatabase:**  Contém o código de conexão com o database.
 * **controladores:** Código das funções usadas nas rotas.
+* **schemas:** Arquivos de validações espicificas utilizadas nas rotas.
 * **rotas :** Arquivo contendo todas as rotas da aplicação.
 * **tests:** Testes automatizados.
 
@@ -50,21 +51,40 @@
 ><br>
 }
 
--- receber nome,email,senha no body da requisição.
--- validar obrigatoriamente nome,email,senha.
--- verificar existencia do email cadastrado.
--- criar a hash da senha do usuário e salvar no banco de dados.
--- cadastrar usuário no banco de dados.
--- responder com status sem conteúdo no corpo da resposta.
+### POST  `/user/login`
+* Rota para login do usuário.
 
-### POST /user/login
+### Parâmetros
+* Nenhum parâmetro necessário.
 
--- receber o email,senha no body da requisição
--- verificar a existência do usuário com o email informado, caso não encontre retornar mensagem de erro.
--- verificar se a senha informada do usuário informada no body é a msm comparada com a senha do banco de dados.
--- criar o token com o id do usuário.
--- responder com informações do usuário exceto a senha e o token.
+### Corpo da requisição.
+> {
+> <br>
+>&nbsp;"username" : " teste",
+> <br>
+>&nbsp;"senha" : " 123456"
+> <br>
+{
 
+### Exemplo de Resposta.
+>{
+<br>
+>&nbsp&nbsp"user": {
+<br>
+>&nbsp&nbsp"id": 1,
+<br>
+>&nbsp&nbsp"username": "teste",
+<br>
+>&nbsp;&nbsp;"email": "teste@teste.com",
+<br>
+>&nbsp;&nbsp;"user_photo": "https://yourbody.s3.us-east-005.backblazeb2.com/imagens/user.png"
+<br>
+>&nbsp;&nbsp;},
+<br>
+>&nbsp;"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzAxNzg0Mjk2LCJleHAiOjE3MDE4NzA2OTZ9.WztLw1G7jiKqi6OE2YeZdDDNTsJHwZwSCqtBJ7wZvwE"
+<br>
+>}
+<br>
 ### Criar intermediário de validação de usuário
 
 -- receber o token da requisição pelo cabeçalho.
