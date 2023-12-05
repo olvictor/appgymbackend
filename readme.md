@@ -68,23 +68,23 @@
 
 ### Exemplo de Resposta.
 >{
-<br>
->&nbsp&nbsp"user": {
-<br>
->&nbsp&nbsp"id": 1,
-<br>
->&nbsp&nbsp"username": "teste",
-<br>
+><br>
+>&nbsp;&nbsp;"user": {
+><br>
+>&nbsp;&nbsp;"id": 1,
+><br>
+>&nbsp;&nbsp;"username": "teste",
+><br>
 >&nbsp;&nbsp;"email": "teste@teste.com",
-<br>
+><br>
 >&nbsp;&nbsp;"user_photo": "https://yourbody.s3.us-east-005.backblazeb2.com/imagens/user.png"
-<br>
+><br>
 >&nbsp;&nbsp;},
-<br>
->&nbsp;"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzAxNzg0Mjk2LCJleHAiOjE3MDE4NzA2OTZ9.WztLw1G7jiKqi6OE2YeZdDDNTsJHwZwSCqtBJ7wZvwE"
-<br>
+><br>
+>&nbsp;&nbsp;"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzAxNzg0Mjk2LCJleHAiOjE3MDE4NzA2OTZ9.WztLw1G7jiKqi6OE2YeZdDDNTsJHwZwSCqtBJ7wZvwE"
+><br>
 >}
-<br>
+><br>
 ### Criar intermediário de validação de usuário
 
 -- receber o token da requisição pelo cabeçalho.
