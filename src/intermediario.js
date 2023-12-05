@@ -29,7 +29,7 @@ const validarUsuario = async (req, res, next) => {
       return res.status(400).json({ mensagem: "Acesso não autorizado ." });
     }
 
-    const { password: __, ...user } = usuarioLogado;
+    const { senha: __, ...user } = usuarioLogado;
 
     req.usuario = user;
 
