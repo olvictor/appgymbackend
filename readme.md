@@ -34,17 +34,17 @@
 
 ### Exemplo de Resposta.
 >{
-> <br>
+><br>
 >&nbsp;"mensagem": "Usuario cadastrado com sucesso .",
-> <br>
+><br>
 >&nbsp;"user": {
 > <br>
 >&nbsp;&nbsp;"id": 1,
 > <br>
 >&nbsp;&nbsp;"username": "teste",
-> <br>
->&nbsp;&nbsp;"email": "tese@teste.com",
-> <br>
+><br>
+>&nbsp;&nbsp; "email": "tese@teste.com",
+><br>
 >&nbsp;&nbsp;	"user_photo": "https://yourbody.s3.us-east-005.backblazeb2.com/imagens/user.png"
 ><br>
 >&nbsp;&nbsp;}
@@ -113,10 +113,55 @@
 
 ### POST /user/info
 
--- receber idade ,peso ,altura ,sexo no body da requisição.
--- pegar o id do usuário fornecido pelo token.
--- registrar as informações no banco de dados
--- retornar o status sem conteúdo no corpo da resposta
+* Rota para adicionar informações sobre o  usuário.
+
+### Parâmetros
+* Nenhum parâmetro necessário.
+
+### Corpo da requisição.
+
+>{
+><br>
+>&nbsp;&nbsp;	"peso" : "80",
+><br>
+>&nbsp;&nbsp;	"altura" : "1.79",
+><br>
+>&nbsp;&nbsp;	"sexo" : "masculino",
+><br>
+>&nbsp;&nbsp;	"idade":"28",
+><br>
+>&nbsp;&nbsp;	"nivel_de_atividade":"leve",
+><br>
+>&nbsp;&nbsp;	"objetivo": "perder"
+><br>
+>}
+
+### Exemplo de Resposta.
+>{
+><br>
+>	&nbsp;&nbsp;"id": 1,
+><br>
+>	&nbsp;&nbsp;"usuario_id": 1,
+><br>
+>	&nbsp;&nbsp;"nome": null,
+><br>
+>	&nbsp;&nbsp;"idade": "28",
+><br>
+>	&nbsp;&nbsp;"altura": "1.79",
+><br>
+>	&nbsp;&nbsp;"peso": "80",
+><br>
+>	&nbsp;&nbsp;"sexo": "masculino",
+><br>
+>	&nbsp;&nbsp;"imc": null,
+><br>
+>&nbsp;&nbsp;"imc_classificacao": null,
+><br>
+>	&nbsp;&nbsp;"nivel_de_atividade": "leve",
+><br>
+>	&nbsp;&nbsp;"objetivo": "perder"
+><br>
+>	}
 
 ### POST /user/post
 
