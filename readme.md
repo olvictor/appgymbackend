@@ -174,12 +174,69 @@
 
 ### DELETE /user/post/:id
 
--- receber pelo parametro de roda o ID do post a ser deletado.
--- validar se o autor do post é o mesmo do usuário que está fazendo a requisição.
--- deletar do banco de dados o post.
--- responder com status sem conteúdo no corpo da resposta.
+* Rota para deletar um post do usuário .
 
-### GET /user/post/
+### Parâmetros
+* :id.
 
--- listar todos os posts do usuário logado.
--- responder com status sem conteúdo no corpo da resposta.
+### Corpo da requisição.
+* Nenhum campo necessário .
+
+### Exemplo de Resposta.
+>{
+><br>
+>&nbsp;&nbsp;	"mensagem": "Post deletado com sucesso .",
+><br>
+>	&nbsp;&nbsp;"post_deletado": {
+><br>
+>	&nbsp;&nbsp;	"id": 7,
+><br>
+>	&nbsp;&nbsp;	"usuario_id": 1,
+><br>
+>	&nbsp;&nbsp;	"conteudo": "Realizando post .",
+><br>
+>	&nbsp;&nbsp;	"imagem_url": "https://yourbody.s3.us-east-005.backblazeb2.com/imagens/gym.jpg",
+><br>
+>	&nbsp;&nbsp;	"data_publicacao": "2023-12-06T15:01:39.075Z"
+><br>
+>	&nbsp;&nbsp;}
+><br>
+>}
+
+### GET /user/feed/
+
+* Retorna os posts do usuário logado.
+
+### Parâmetros
+* Nenhum parâmetro necessário.
+* 
+### Corpo da requisição.
+* Nenhum campo necessário .
+### Exemplo de Resposta.
+
+>{
+><br>
+>&nbsp;&nbsp;"id": 5,
+><br>
+>&nbsp;&nbsp;"usuario_id": 1,
+><br>
+>&nbsp;&nbsp;"conteudo": "Realizando post .",
+><br>
+>&nbsp;&nbsp;"imagem_url": "https://yourbody.s3.us-east-005.backblazeb2.com/imagens/gym.jpg",
+><br>
+>&nbsp;&nbsp;"data_publicacao": "2023-12-06T14:22:12.743Z"
+><br>
+>},
+><br>
+>{
+>&nbsp;&nbsp;"id": 6,
+><br>
+>&nbsp;&nbsp;"usuario_id": 1,
+><br>
+>&nbsp;&nbsp;"conteudo": "Realizando post .",
+><br>
+>&nbsp;&nbsp;"imagem_url": "https://yourbody.s3.us-east-005.backblazeb2.com/imagens/gym.jpg",
+><br>
+>&nbsp;&nbsp;"data_publicacao": "2023-12-06T15:01:37.833Z"
+><br>
+>},
