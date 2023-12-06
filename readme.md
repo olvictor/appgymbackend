@@ -15,7 +15,7 @@
 
 ## 📋 Rotas da Aplicação 
 
-### POST  `/user/cadastrar`
+### 💬 POST  `/user/cadastrar`
 * Rota para cadastro de usuários.
 
 ### Parâmetros
@@ -51,7 +51,7 @@
 ><br>
 }
 
-### POST  `/user/login`
+### 💬 POST  `/user/login`
 * Rota para login do usuário.
 
 ### Parâmetros
@@ -87,7 +87,7 @@
 ><br>
 
 
-### GET `/user/perfil`
+### 💬 GET `/user/perfil`
 
 * Rota para buscar usuário.
 
@@ -111,7 +111,7 @@
 >}
 ><br>
 
-### POST /user/info
+### 💬 POST  /user/info
 
 * Rota para adicionar informações sobre o  usuário.
 
@@ -163,16 +163,40 @@
 ><br>
 >	}
 
-### POST /user/post
+### 💬 POST /user/post
 
--- receber o conteudo do post no body.
--- receber a imagem no req.file .
--- fazer conexao com o backblaze .
--- hospedar a imagem no backblaze e gerar URL.
--- salvar o horario do post o conteúdo, usuário autor do post e o horário no banco de dados.
--- retornar o status sem conteudo na resposta.
+* Rota para adicionar um post do usuário.
 
-### DELETE /user/post/:id
+### Parâmetros
+* Nenhum parâmetro necessário.
+
+### Corpo da requisição.
+
+>{
+><br>
+>&nbsp;&nbsp;	"Conteudo" : "Realizando um post ." ,
+><br>
+>&nbsp;&nbsp;	"imagem" : "arquivo.png" type: "file",
+><br>
+>}
+
+### Exemplo de Resposta.
+>{
+><br>
+>&nbsp;&nbsp;	"id": 1,
+><br>
+>&nbsp;&nbsp;	"usuario_id": 1,
+><br>
+>&nbsp;&nbsp;	"conteudo": "Realizando post .",
+><br>
+>&nbsp;&nbsp;	"imagem_url": "https://yourbody.s3.us-east-005.backblazeb2.com/imagens/gym.jpg",
+><br>
+>&nbsp;&nbsp;"data_publicacao": "2023-12-06T15:01:42.995Z"
+><br>
+>}
+
+
+### 💬 DELETE /user/post/:id
 
 * Rota para deletar um post do usuário .
 
@@ -189,7 +213,7 @@
 ><br>
 >	&nbsp;&nbsp;"post_deletado": {
 ><br>
->	&nbsp;&nbsp;	"id": 7,
+>	&nbsp;&nbsp;	"id": 1,
 ><br>
 >	&nbsp;&nbsp;	"usuario_id": 1,
 ><br>
@@ -197,13 +221,13 @@
 ><br>
 >	&nbsp;&nbsp;	"imagem_url": "https://yourbody.s3.us-east-005.backblazeb2.com/imagens/gym.jpg",
 ><br>
->	&nbsp;&nbsp;	"data_publicacao": "2023-12-06T15:01:39.075Z"
+>	&nbsp;&nbsp;	"data_publicacao": "2023-12-06T15:01:42.995Z"
 ><br>
 >	&nbsp;&nbsp;}
 ><br>
 >}
 
-### GET /user/feed/
+###  💬 GET /user/feed/
 
 * Retorna os posts do usuário logado.
 
