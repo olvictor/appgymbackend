@@ -79,7 +79,7 @@ const loginUsuario = async (req, res) => {
 
 const getUsuario = async (req, res) => {
   const usuario = req.usuario;
-  console.log(usuario)
+
   return res.status(200).json(usuario);
 };
 
@@ -115,6 +115,7 @@ const cadastrarInfoUsuarios = async (req, res) => {
 
     return res.status(200).json(cadastrarInfoUsuario);
   } catch (error) {
+    console.log(error)
     if (error.code === "23505") {
       return res.status(400).json({
         mensagem: "Informações do usuário já registradas com esse ID.",

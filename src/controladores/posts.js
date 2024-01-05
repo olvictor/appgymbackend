@@ -28,14 +28,12 @@ const cadastrarPost = async (req, res) => {
         usuario_id: id,
         conteudo,
         imagem_url: imagemUpload.Location,
-      });
-
+      }).returning('*');
       return res
         .status(201)
-        .json({ mensagem: "Post cadastrado com sucesso ." });
+        .json(postagem[0]);
     }
   } catch (error) {
-    console.log(error);
     return res.status(500).json(error.message);
   }
 };
@@ -58,7 +56,29 @@ const buscarPosts = async (req, res) => {
   }
 };
 
+
+const deletarPost = async(req,res) =>{
+  const {id} = req.params;
+  const usuario = req.usuario
+  try{
+    const postExistente = await knex('posts').where({id}).first()
+    if(!postExistente){
+      return res.status(400).json({mensagem:'Post não encontrado .'})
+    }
+    if(usuario.id !== postExistente.usuario_id){
+      return res.status(400).json({mensagem:'Sem permissão .'})
+    }
+
+    const deletarPostagem = await knex('posts').delete().where({id})
+
+    return res.status(200).json({mensagem:'Post deletado com sucesso .',post_deletado: postExistente})
+
+  }catch(error){
+    return res.status(500).json(error.message);
+  }
+}
 module.exports = {
   cadastrarPost,
   buscarPosts,
+  deletarPost
 };

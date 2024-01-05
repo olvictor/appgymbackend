@@ -46,3 +46,20 @@ imc_classificacao text,
 nivel_de_atividade text,
 objetivo text
 );
+
+
+create table usuarios_registro_treinos(
+id serial primary key,
+musculos TEXT,
+data_publicacao timestamp default now()
+);
+
+
+CREATE TABLE usuarios_metas (
+id SERIAL PRIMARY KEY,
+usuario_id INT REFERENCES usuarios(id),
+titulo TEXT,
+descricao TEXT,
+data_inicio TIMESTAMP,
+data_fim TIMESTAMP
+);
