@@ -63,3 +63,10 @@ descricao TEXT,
 data_inicio TIMESTAMP,
 data_fim TIMESTAMP
 );
+
+create table usuarios_treino_semanal(
+id SERIAL PRIMARY KEY,
+usuario_id INT references usuarios(id) NOT NULL,
+treino TEXT ,
+dia_da_semana TEXT
+);
