@@ -51,9 +51,9 @@ objetivo text
 create table usuarios_registro_treinos(
 id serial primary key,
 musculos TEXT,
+usuario_id INT references usuarios(id),
 data_publicacao timestamp default now()
 );
-
 
 CREATE TABLE usuarios_metas (
 id SERIAL PRIMARY KEY,
@@ -70,3 +70,18 @@ usuario_id INT references usuarios(id) NOT NULL,
 treino TEXT ,
 dia_da_semana TEXT
 );
+
+CREATE TABLE tipos_de_treinos(
+id SERIAL PRIMARY KEY,
+tipo TEXT
+);
+
+insert into tipos_de_treinos(tipo) values
+('bicepos'),
+('triceps'),
+('costas'),
+('peito'),
+('perna'),
+('ombro'),
+('abdmomen'),
+('cardio')

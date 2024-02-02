@@ -10,9 +10,9 @@ const schemaInfoUsuario = require("../schemas/schemaInfoUsuario");
 const { criarComentario ,buscarComentarios } = require("../controladores/comentarios");
 const schemaCadastrarPost = require("../schemas/schemaCadastrarPost");
 const schemaCadastrarComentario = require("../schemas/schemaCadastrarComentario");
-const { registrarTreino, buscarTreino } = require("../controladores/treinos");
+const { registrarTreino, buscarTreino, buscarTiposDeTreino } = require("../controladores/treinos");
 const { cadastrarMetas, buscarMetas } = require("../controladores/metas");
-const { cadastrarTreinoSemanal } = require("../controladores/treino_semanal");
+const { cadastrarTreinoSemanal, buscarTreinoSemanal } = require("../controladores/treino_semanal");
 const rotas = express();
 
 rotas.post("/user/cadastrar",validarCampos(schemaCadastroUsuarios),cadastarUsuario);
@@ -43,6 +43,8 @@ rotas.get("/user/metas",buscarMetas);
 
 
 rotas.post("/user/treino_semanal",cadastrarTreinoSemanal);
+rotas.get("/user/treino_semanal",buscarTreinoSemanal);
 
+rotas.get("/tipo_de_treino",buscarTiposDeTreino)
 
 module.exports = rotas;

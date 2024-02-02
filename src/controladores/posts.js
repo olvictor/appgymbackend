@@ -7,6 +7,7 @@ const cadastrarPost = async (req, res) => {
   const { conteudo } = req.body;
   const imagem = req.file;
   const { id } = req.usuario;
+  
   try {
     if (!imagem) {
       return res
