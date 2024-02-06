@@ -77,7 +77,7 @@ tipo TEXT
 );
 
 insert into tipos_de_treinos(tipo) values
-('bicepos'),
+('biceps'),
 ('triceps'),
 ('costas'),
 ('peito'),
