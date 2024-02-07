@@ -1,5 +1,5 @@
 const express = require("express");
-const { cadastarUsuario ,loginUsuario ,getUsuario ,cadastrarInfoUsuarios ,buscarInfoUsuarios, alterarFotoUsuario} = require("../controladores/usuarios");
+const { cadastarUsuario ,loginUsuario ,getUsuario ,cadastrarInfoUsuarios ,buscarInfoUsuarios, alterarFotoUsuario, editarInfoUsuario} = require("../controladores/usuarios");
 const { validarUsuario } = require("../intermediario");
 const schemaCadastroUsuarios = require("../schemas/schemaCadastroUsuarios");
 const validarCampos = require("../validarCampos");
@@ -31,6 +31,8 @@ rotas.get("/user/feed", buscarPosts);
 
 rotas.post("/user/info",validarCampos(schemaInfoUsuario),cadastrarInfoUsuarios);
 rotas.get("/user/info", buscarInfoUsuarios);
+rotas.put("/user/info", editarInfoUsuario);
+
 
 rotas.post("/user/treinos",registrarTreino);
 rotas.get("/user/treinos",buscarTreino);

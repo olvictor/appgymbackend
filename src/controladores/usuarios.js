@@ -2,6 +2,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const knex = require("../conectiondatabase/connectDB");
 const s3 = require("../conectionbucket/conectionBucket");
+const { equal } = require("joi");
 
 require("dotenv").config();
 
@@ -127,6 +128,49 @@ const cadastrarInfoUsuarios = async (req, res) => {
   }
 };
 
+const editarInfoUsuario = async(req,res) =>{
+  const {id} = req.usuario
+  const {
+    nome,
+    peso,
+    altura,
+    idade,
+    sexo,
+    nivel_de_atividade,
+    imc,
+    imc_classificacao,
+    objetivo,
+  } = req.body;
+
+  try{
+    const verificarInfoExistente = await knex('usuarios_info').select('*').where({usuario_id: id}).first()
+    
+    if(!verificarInfoExistente){
+     return res.status(400).json({Mensagem: 'Nenhuma informação encontrada para o usuário .'})
+    }
+
+   const editarInfo = await knex('usuarios_info').where({usuario_id: id}).update({
+      nome,
+      altura,
+      peso,
+      idade,
+      sexo,
+      usuario_id: id,
+      nivel_de_atividade,
+      imc,
+      imc_classificacao,
+      objetivo,
+    })
+    .returning("*");
+
+    return res.status(200).json(editarInfo)
+
+  }catch(error){
+    return res.status(500).json({ mensagem: error.message });
+  }
+
+}
+
 const buscarInfoUsuarios = async (req, res) => {
   const { id } = req.usuario;
 
@@ -179,5 +223,6 @@ module.exports = {
   getUsuario,
   cadastrarInfoUsuarios,
   buscarInfoUsuarios,
-  alterarFotoUsuario
+  alterarFotoUsuario,
+  editarInfoUsuario
 };
