@@ -1,5 +1,5 @@
 const express = require("express");
-const { cadastarUsuario ,loginUsuario ,getUsuario ,cadastrarInfoUsuarios ,buscarInfoUsuarios} = require("../controladores/usuarios");
+const { cadastarUsuario ,loginUsuario ,getUsuario ,cadastrarInfoUsuarios ,buscarInfoUsuarios, alterarFotoUsuario} = require("../controladores/usuarios");
 const { validarUsuario } = require("../intermediario");
 const schemaCadastroUsuarios = require("../schemas/schemaCadastroUsuarios");
 const validarCampos = require("../validarCampos");
@@ -24,6 +24,7 @@ rotas.get("/user/perfil", getUsuario);
 
 rotas.post("/user/post",multer.single("imagem"),validarCampos(schemaCadastrarPost),cadastrarPost);
 rotas.delete("/user/post/:id",deletarPost);
+rotas.post("/user/photo",multer.single("imagem"),alterarFotoUsuario);
 
 
 rotas.get("/user/feed", buscarPosts);

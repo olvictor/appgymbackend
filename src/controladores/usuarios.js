@@ -1,6 +1,8 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const knex = require("../conectiondatabase/connectDB");
+const s3 = require("../conectionbucket/conectionBucket");
+
 require("dotenv").config();
 
 const cadastarUsuario = async (req, res) => {
@@ -144,10 +146,38 @@ const buscarInfoUsuarios = async (req, res) => {
   }
 };
 
+const alterarFotoUsuario = async (req,res)=>{
+  const { id } = req.usuario;
+  const imagem = req.file
+  try{
+    const usuario = await knex('usuarios').select('id','username').where({id}).first()
+
+    if(!usuario){
+     return res.status(400).json({ mensagem:'Usuário não encontrado'});
+    }
+    if(imagem){
+      const imagemUpload = await s3.upload({
+        Bucket: process.env.BUCKET_NAME,
+        Key: `imagens/usuario-perfil${id}/${imagem.originalname}`,
+        Body: imagem.buffer,
+        ContentType: imagem.mimetype,
+      })
+      .promise();
+  
+      const updateFotoPerfil = await knex('usuarios').where({id}).update({user_photo: imagemUpload.Location})
+
+      return res.status(200).json({...usuario,user_photo: imagemUpload.Location})
+    }
+  }catch(error){
+    return res.status(500).json({ mensagem:error.message});
+  }
+}
+
 module.exports = {
   cadastarUsuario,
   loginUsuario,
   getUsuario,
   cadastrarInfoUsuarios,
   buscarInfoUsuarios,
+  alterarFotoUsuario
 };
