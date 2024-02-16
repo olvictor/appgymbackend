@@ -61,8 +61,10 @@ const buscarPosts = async (req, res) => {
 const deletarPost = async(req,res) =>{
   const {id} = req.params;
   const usuario = req.usuario
+
   try{
     const postExistente = await knex('posts').where({id}).first()
+    
     if(!postExistente){
       return res.status(400).json({mensagem:'Post não encontrado .'})
     }

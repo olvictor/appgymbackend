@@ -24,6 +24,26 @@ const buscarTreino = async (req,res) =>{
       return res.status(500).json({mensagem:error})
     }
 }
+const editarTreino = async (req,res)=> {
+    const { id } = req.usuario
+    const { treino_id } = req.body;
+    const { musculos } = req.body
+    const { data } = req.body
+
+    try{
+      const treinoExistente = await knex('usuarios_registro_treinos').where({id:treino_id,usuario_id:id}).select('*').returning('*').first()
+      if(!treinoExistente){
+        return res.status(400).json({mensagem:'Treino não encontrado.'})
+      }
+      const editarTreino = await knex('usuarios_registro_treinos').update({musculos: musculos.toString()}).where({id:treino_id,usuario_id:id})
+      console.log(treinoExistente)
+      return res.status(200).json()
+
+    }catch(error){
+      console.log(error)
+      return res.status(500).json({mensagem:error})
+    }
+}
 
 const buscarTiposDeTreino = async(req,res)=>{
   try{
@@ -41,5 +61,6 @@ const buscarTiposDeTreino = async(req,res)=>{
 module.exports = {
     registrarTreino,
     buscarTreino,
-    buscarTiposDeTreino
+    buscarTiposDeTreino,
+    editarTreino
 }

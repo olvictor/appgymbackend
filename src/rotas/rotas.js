@@ -10,7 +10,7 @@ const schemaInfoUsuario = require("../schemas/schemaInfoUsuario");
 const { criarComentario ,buscarComentarios } = require("../controladores/comentarios");
 const schemaCadastrarPost = require("../schemas/schemaCadastrarPost");
 const schemaCadastrarComentario = require("../schemas/schemaCadastrarComentario");
-const { registrarTreino, buscarTreino, buscarTiposDeTreino } = require("../controladores/treinos");
+const { registrarTreino, buscarTreino, buscarTiposDeTreino, editarTreino } = require("../controladores/treinos");
 const { cadastrarMetas, buscarMetas } = require("../controladores/metas");
 const { cadastrarTreinoSemanal, buscarTreinoSemanal } = require("../controladores/treino_semanal");
 const rotas = express();
@@ -36,6 +36,8 @@ rotas.put("/user/info", editarInfoUsuario);
 
 rotas.post("/user/treinos",registrarTreino);
 rotas.get("/user/treinos",buscarTreino);
+rotas.put("/user/treinos",editarTreino);
+
 
 rotas.post("/comentarios",validarCampos(schemaCadastrarComentario),criarComentario);
 rotas.get("/comentarios/:post_id", buscarComentarios);
