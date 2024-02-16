@@ -36,7 +36,7 @@ rotas.put("/user/info", editarInfoUsuario);
 
 rotas.post("/user/treinos",registrarTreino);
 rotas.get("/user/treinos",buscarTreino);
-rotas.put("/user/treinos",editarTreino);
+rotas.put("/user/treinos/:id",editarTreino);
 
 
 rotas.post("/comentarios",validarCampos(schemaCadastrarComentario),criarComentario);
