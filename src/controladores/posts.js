@@ -72,11 +72,13 @@ const deletarPost = async(req,res) =>{
       return res.status(400).json({mensagem:'Sem permissão .'})
     }
 
+    const deletarComentariosDaPostagem = await knex('comentarios').where({post_id:id}).del()
     const deletarPostagem = await knex('posts').delete().where({id})
 
     return res.status(200).json({mensagem:'Post deletado com sucesso .',post_deletado: postExistente})
 
   }catch(error){
+    console.log(error)
     return res.status(500).json(error.message);
   }
 }

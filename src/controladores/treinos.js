@@ -29,7 +29,6 @@ const editarTreino = async (req,res)=> {
     const { id } = req.params;
     const { musculos } = req.body
     const { data } = req.body
-    console.log(id)
 
     try{
       const treinoExistente = await knex('usuarios_registro_treinos').where({id,usuario_id}).select('*').returning('*').first()
@@ -37,7 +36,7 @@ const editarTreino = async (req,res)=> {
         return res.status(400).json({mensagem:'Treino não encontrado.'})
       }
       const editarTreino = await knex('usuarios_registro_treinos').update({musculos: musculos.toString(), data_publicacao:data}).where({id,usuario_id})
-      return res.status(200).json()
+      return res.status(200).json(editarTreino)
 
     }catch(error){
       return res.status(500).json({mensagem:error})
