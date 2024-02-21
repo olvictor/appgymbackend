@@ -2,11 +2,6 @@ const joi = require('joi')
 
 
 const schemaUsuario = joi.object({
-    email: joi.string().required().messages({
-        'any.required': "O campo email é obrigatório",
-        'string.base':'O campo email precisa ser uma string',
-        'string.empty': "O campo email é obrigatório"
-    }),
     username: joi.string().required().messages({
         'any.required': "O campo username é obrigatório",
         'string.base':'O campo username precisa ser uma string',

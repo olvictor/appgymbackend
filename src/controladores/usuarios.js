@@ -7,7 +7,7 @@ const { equal } = require("joi");
 require("dotenv").config();
 
 const cadastarUsuario = async (req, res) => {
-  const { username, email, senha } = req.body;
+  const { username, senha } = req.body;
 
   try {
     const passwordHash = await bcrypt.hash(senha, 10);
@@ -21,16 +21,16 @@ const cadastarUsuario = async (req, res) => {
     const emailExistente = await knex
       .select("*")
       .from("usuarios")
-      .where({ email })
+      .where({ username })
       .first();
     if (usuarioExistente || emailExistente) {
       return res
         .status(400)
-        .json({ mensagem: "Email e ou username já cadastrado ." });
+        .json({ mensagem: "Usuário já cadastrado ." });
     }
 
     const result = await knex
-      .insert({ username, email, senha: passwordHash })
+      .insert({ username, senha: passwordHash })
       .into("usuarios")
       .returning("*");
 
@@ -40,6 +40,7 @@ const cadastarUsuario = async (req, res) => {
       .status(201)
       .json({ mensagem: `Usuário cadastrado com sucesso .`, user });
   } catch (error) {
+    console.log(error)
     return res
       .status(500)
       .json({ message: `Erro interno do servidor : ${error}` });
